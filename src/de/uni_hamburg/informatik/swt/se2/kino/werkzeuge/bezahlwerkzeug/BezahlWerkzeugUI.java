@@ -11,7 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 public class BezahlWerkzeugUI {
-	private JDialog _dialog; 
+	private JDialog _dialog;
 
 	private JPanel _hauptpanel;
 
@@ -28,10 +28,10 @@ public class BezahlWerkzeugUI {
 
 	private JButton _buttonAbbrechen;
 	private JButton _buttonOK;
-	
 
 	/**
-	 * KONSTRUKTOR-KOMMENTAR: BLABLABLA
+	 * Initialisert die Oberfläche.
+	 * @param preis Der zu zahlende Betrag 
 	 */
 	public BezahlWerkzeugUI(int preis) 
 	{
@@ -41,17 +41,23 @@ public class BezahlWerkzeugUI {
 		initButtonpanel();
 	}
 
-	private void initDialog() 
-	{
-		_dialog = new JDialog(); 
+	/**
+	 * Initialisiert das Fenster.
+	 */
+	private void initDialog() {
+		_dialog = new JDialog();
 		_dialog.setTitle("Bezahlvorgang");
 		_dialog.setModalityType(ModalityType.APPLICATION_MODAL);
 		_dialog.setBounds(150, 150, 0, 0);
 		_dialog.setLayout(new BorderLayout()); // Parameter für Border-Layout???
 	}
 
-	private void initHauptpanel(int preis) 
-	{
+	/**
+	 * Initialisiert das Hauptpanel des Fensters. In dem Hauptpanel
+	 * befinden sich alle für die Funktionen wichtigen Textfelder und Labels.
+	 * @param preis Der zu zahlende Betrag
+	 */
+	private void initHauptpanel(int preis) {
 		_hauptpanel = new JPanel();
 		_hauptpanel.setLayout(new GridLayout(3, 2));
 
@@ -62,6 +68,10 @@ public class BezahlWerkzeugUI {
 		_dialog.add(_hauptpanel, BorderLayout.CENTER);
 	}
 
+	/**
+	 * Initialisiert das Textfeld für den zu zahlenden Betrag und das dazugehörige Label.
+	 * @param preis Der zu zahlende Betrag
+	 */
 	private void initZuZahlen(int preis) 
 	{
 		_labelZuZahlen = new JLabel("Zu zahlender Betrag: ");
@@ -70,18 +80,22 @@ public class BezahlWerkzeugUI {
 		_fieldZuZahlen.setEditable(false);
 		_hauptpanel.add(_labelZuZahlen);
 		_hauptpanel.add(_fieldZuZahlen);
-		
 	}
 
+	/**
+	 * Initialisiert das Textfeld für den bezahlten Betrag und das dazugehörige Label.
+	 */
 	private void initBezahlt() 
 	{
 		_labelBezahlt = new JLabel("Bezahlter Betrag: ");
 		_fieldBezahlt = new JTextField(10);
 		_hauptpanel.add(_labelBezahlt);
 		_hauptpanel.add(_fieldBezahlt);
-
 	}
 
+	/**
+	 * Initialisiert das Textfeld für den Restbetrag und das dazugehörige Label.
+	 */
 	private void initRestbetrag() 
 	{
 		_labelRestbetrag = new JLabel("Rückgeld: ");
@@ -91,6 +105,10 @@ public class BezahlWerkzeugUI {
 		_hauptpanel.add(_fieldRestbetrag);
 	}
 
+	/**
+	 * Initialisiert das Buttonpanel des Fensters. In dem Buttonpanel
+	 * befinden sich alle Buttons des Fensters.
+	 */
 	private void initButtonpanel() 
 	{
 		_buttonpanel = new JPanel();
@@ -101,46 +119,62 @@ public class BezahlWerkzeugUI {
 		_dialog.add(_buttonpanel, BorderLayout.SOUTH);
 	}
 
-	private void initButtonAbbrechen() 
+	/**
+	 * Initialisiert den Abbrechen-Button.
+	 */
+	private void initButtonAbbrechen()
 	{
 		_buttonAbbrechen = new JButton("Abbrechen");
 		_buttonpanel.add(_buttonAbbrechen);
 	}
 
+	/**
+	 * Initialisiert den Ok-Button.
+	 */
 	private void initButtonOK() 
 	{
 		_buttonOK = new JButton("OK");
 		_buttonpanel.add(_buttonOK);
 	}
 
+	/**
+	 * Macht das Fenster sichtbar.
+	 */
 	public void zeigeFenster() 
 	{
 		_dialog.pack();
 		_dialog.setVisible(true);
 	}
 
+	/**
+	 * Schließt das Fenster.
+	 */
 	public void schliesseFenster() 
 	{
 		_dialog.dispose();
 	}
 
+	
 	public JTextField getFieldZuZahlen() 
 	{
 		return _fieldZuZahlen;
 	}
 
-	public JTextField getFieldBezahlt() 
+	
+	public JTextField getFieldBezahlt()
 	{
 		return _fieldBezahlt;
 	}
 
+	
 	public JTextField getFieldRestbetrag() 
 	{
 		return _fieldRestbetrag;
 	}
 
-	public JButton getButtonAbbrechen() 
-	{
+	
+	
+	public JButton getButtonAbbrechen() {
 		return _buttonAbbrechen;
 	}
 
@@ -149,24 +183,35 @@ public class BezahlWerkzeugUI {
 		return _buttonOK;
 	}
 
+	/**
+	 * Macht den Ok-Button klickbar.
+	 * @param klickbar True wenn der Button angeklickt werden kann, sonst false
+	 */
 	public void setButtonOkKlickbar(boolean klickbar) 
 	{
 		_buttonOK.setEnabled(klickbar);
 	}
+
+	/**
+	 * Setzt den Restbetrag.
+	 * @param restbetrag Das Rückgeld
+	 */
+	public void setRestbetrag(int restbetrag) 
+	{
+		_fieldRestbetrag.setText(Integer.toString(restbetrag));
+	}
+
 	
-	 public void setRestbetrag(int restbetrag)
-	 {
-	 _fieldRestbetrag.setText(Integer.toString(restbetrag));
-	 }
-	
-	 public int getFieldBezahltInhalt()
-	 {
-	 return Integer.parseInt(_fieldBezahlt.getText());
-	 }
-	 
-	 public void setFocusImTextfeld()
-	 {
-		 _fieldBezahlt.requestFocus();
-		 _fieldBezahlt.setCaretPosition(0);
-	 }
+	public int getFieldBezahltInhalt() 
+	{
+		return Integer.parseInt(_fieldBezahlt.getText());
+	}
+
+	/**
+	  * Setzt den Cursor in das editierbare Textfeld.
+	  */
+	public void setFocusImTextfeld() {
+		_fieldBezahlt.requestFocus();
+		_fieldBezahlt.setCaretPosition(0);
+	}
 }
