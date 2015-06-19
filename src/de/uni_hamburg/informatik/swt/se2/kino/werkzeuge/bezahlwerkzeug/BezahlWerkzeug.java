@@ -34,6 +34,7 @@ public class BezahlWerkzeug
         _ui.setButtonOkKlickbar(false);
         registriereUIAktion();
         _ui.zeigeFenster();
+        _ui.setFocusImTextfeld();
     }
     
     /**

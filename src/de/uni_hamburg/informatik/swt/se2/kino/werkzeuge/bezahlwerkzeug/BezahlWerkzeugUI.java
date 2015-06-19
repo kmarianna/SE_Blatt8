@@ -1,6 +1,7 @@
 package de.uni_hamburg.informatik.swt.se2.kino.werkzeuge.bezahlwerkzeug;
 
 import java.awt.BorderLayout;
+import java.awt.GridLayout;
 import java.awt.Dialog.ModalityType;
 
 import javax.swing.JButton;
@@ -42,7 +43,8 @@ public class BezahlWerkzeugUI {
 
 	private void initDialog() 
 	{
-		_dialog = new JDialog(); //TODO Owner und Titel 
+		_dialog = new JDialog(); 
+		_dialog.setTitle("Bezahlvorgang");
 		_dialog.setModalityType(ModalityType.APPLICATION_MODAL);
 		_dialog.setBounds(150, 150, 0, 0);
 		_dialog.setLayout(new BorderLayout()); // Parameter für Border-Layout???
@@ -51,6 +53,7 @@ public class BezahlWerkzeugUI {
 	private void initHauptpanel(int preis) 
 	{
 		_hauptpanel = new JPanel();
+		_hauptpanel.setLayout(new GridLayout(3, 2));
 
 		initZuZahlen(preis);
 		initBezahlt();
@@ -61,9 +64,10 @@ public class BezahlWerkzeugUI {
 
 	private void initZuZahlen(int preis) 
 	{
-		_labelZuZahlen = new JLabel("Zu zahlender Betrag:");
+		_labelZuZahlen = new JLabel("Zu zahlender Betrag: ");
 		_fieldZuZahlen = new JTextField(10);
 		_fieldZuZahlen.setText(Integer.toString(preis));
+		_fieldZuZahlen.setEditable(false);
 		_hauptpanel.add(_labelZuZahlen);
 		_hauptpanel.add(_fieldZuZahlen);
 		
@@ -71,7 +75,7 @@ public class BezahlWerkzeugUI {
 
 	private void initBezahlt() 
 	{
-		_labelBezahlt = new JLabel("Bezahlter Betrag:");
+		_labelBezahlt = new JLabel("Bezahlter Betrag: ");
 		_fieldBezahlt = new JTextField(10);
 		_hauptpanel.add(_labelBezahlt);
 		_hauptpanel.add(_fieldBezahlt);
@@ -80,8 +84,9 @@ public class BezahlWerkzeugUI {
 
 	private void initRestbetrag() 
 	{
-		_labelRestbetrag = new JLabel("Rückgeld:");
+		_labelRestbetrag = new JLabel("Rückgeld: ");
 		_fieldRestbetrag = new JTextField(10);
+		_fieldRestbetrag.setEditable(false);
 		_hauptpanel.add(_labelRestbetrag);
 		_hauptpanel.add(_fieldRestbetrag);
 	}
@@ -157,5 +162,11 @@ public class BezahlWerkzeugUI {
 	 public int getFieldBezahltInhalt()
 	 {
 	 return Integer.parseInt(_fieldBezahlt.getText());
+	 }
+	 
+	 public void setFocusImTextfeld()
+	 {
+		 _fieldBezahlt.requestFocus();
+		 _fieldBezahlt.setCaretPosition(0);
 	 }
 }
