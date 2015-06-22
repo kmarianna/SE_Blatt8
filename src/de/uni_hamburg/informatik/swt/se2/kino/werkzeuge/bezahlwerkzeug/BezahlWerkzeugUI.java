@@ -26,7 +26,7 @@ public class BezahlWerkzeugUI {
 	
 	
 	// Ich bin mir wegen der Form nicht so ganz sicher, aber so ist das Feld für alphanumerische Einträge
-	// gespert. Sprich es dürfen nur Zahlen eingegeben werden.
+	// gespert. Sprich es dürfen nur Zahlen eingegeben werden. dfsdfsdf 
 	
 	private NumberFormat _format = NumberFormat.getInstance();
     private NumberFormatter _formatter = new NumberFormatter(_format);
