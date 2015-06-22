@@ -3,12 +3,16 @@ package de.uni_hamburg.informatik.swt.se2.kino.werkzeuge.bezahlwerkzeug;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.Dialog.ModalityType;
+import java.text.NumberFormat;
 
+import javax.print.attribute.standard.JobName;
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.text.NumberFormatter;
 
 public class BezahlWerkzeugUI {
 	private JDialog _dialog;
@@ -19,7 +23,15 @@ public class BezahlWerkzeugUI {
 	private JTextField _fieldZuZahlen;
 
 	private JLabel _labelBezahlt;
-	private JTextField _fieldBezahlt;
+	
+	
+	// Ich bin mir wegen der Form nicht so ganz sicher, aber so ist das Feld für alphanumerische Einträge
+	// gespert. Sprich es dürfen nur Zahlen eingegeben werden.
+	
+	private NumberFormat _format = NumberFormat.getInstance();
+    private NumberFormatter _formatter = new NumberFormatter(_format);
+    private JFormattedTextField _fieldBezahlt; 
+    
 
 	private JLabel _labelRestbetrag;
 	private JTextField _fieldRestbetrag;
@@ -88,7 +100,10 @@ public class BezahlWerkzeugUI {
 	private void initBezahlt() 
 	{
 		_labelBezahlt = new JLabel("Bezahlter Betrag: ");
-		_fieldBezahlt = new JTextField(10);
+		
+		_format.setGroupingUsed(false);
+		_formatter.setAllowsInvalid(false);
+		_fieldBezahlt = new JFormattedTextField(_formatter);
 		_hauptpanel.add(_labelBezahlt);
 		_hauptpanel.add(_fieldBezahlt);
 	}
