@@ -28,8 +28,6 @@ public class BezahlWerkzeugUI {
 	// Ich bin mir wegen der Form nicht so ganz sicher, aber so ist das Feld für alphanumerische Einträge
 	// gespert. Sprich es dürfen nur Zahlen eingegeben werden.
 	
-	private NumberFormat _format = NumberFormat.getInstance();
-    private NumberFormatter _formatter = new NumberFormatter(_format);
     private JFormattedTextField _fieldBezahlt; 
     
 
@@ -73,8 +71,8 @@ public class BezahlWerkzeugUI {
 		_hauptpanel = new JPanel();
 		_hauptpanel.setLayout(new GridLayout(3, 2));
 
-		initZuZahlen(preis);
 		initBezahlt();
+		initZuZahlen(preis);
 		initRestbetrag();
 
 		_dialog.add(_hauptpanel, BorderLayout.CENTER);
@@ -101,9 +99,11 @@ public class BezahlWerkzeugUI {
 	{
 		_labelBezahlt = new JLabel("Bezahlter Betrag: ");
 		
-		_format.setGroupingUsed(false);
-		_formatter.setAllowsInvalid(false);
-		_fieldBezahlt = new JFormattedTextField(_formatter);
+		NumberFormat format = NumberFormat.getInstance();
+	    NumberFormatter formatter = new NumberFormatter(format);
+		format.setGroupingUsed(false);
+		formatter.setAllowsInvalid(false);
+		_fieldBezahlt = new JFormattedTextField(formatter);
 		_hauptpanel.add(_labelBezahlt);
 		_hauptpanel.add(_fieldBezahlt);
 	}
